@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Infinite Code Canvas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app">
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="controls-container" id="controlsContainer">
+                <div class="control-group">
+                    <button class="btn-primary" id="addPromptBtn">+ Add Prompt</button>
+                    <button class="btn-secondary" id="toggleConnectionsBtn">Show Connections</button>
+                    <button class="btn-secondary" id="resetViewBtn">Reset View</button>
+                </div>
+                <div class="control-group">
+                    <label>Zoom: <span id="zoomLevel">100%</span></label>
+                    <input type="range" id="zoomSlider" min="10" max="200" value="100">
+                </div>
+                <div class="control-group">
+                    <input type="file" id="fileUpload" accept=".json,.txt" style="display:none">
+                    <button class="btn-secondary" onclick="document.getElementById('fileUpload').click()">Import Data</button>
+                    <button class="btn-secondary" id="exportBtn">Export Data</button>
+                </div>
+            </div>
+        </div>
 
+        <!-- Canvas Container -->
+        <div class="canvas-container" id="canvasContainer">
+            <svg class="connections-layer" id="connectionsLayer"></svg>
+            <div class="canvas" id="canvas"></div>
+        </div>
+
+        <!-- Add/Edit Prompt Modal -->
+        <div class="modal" id="promptModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Code Block</h2>
+                    <span class="close" id="closeModal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Prompt:</label>
+                        <textarea id="promptInput" placeholder="Enter your prompt here..." rows="4"></textarea>
+                    </div>
+                    <div class="code-inputs">
+                        <div class="code-section">
+                            <label>HTML Code:</label>
+                            <textarea id="htmlInput" placeholder="Enter HTML code..." rows="8"></textarea>
+                            <input type="text" id="htmlVersion" placeholder="Version (e.g., V1)" class="version-input">
+                        </div>
+                        <div class="code-section">
+                            <label>JavaScript Code:</label>
+                            <textarea id="jsInput" placeholder="Enter JavaScript code..." rows="8"></textarea>
+                            <input type="text" id="jsVersion" placeholder="Version (e.g., V1)" class="version-input">
+                        </div>
+                        <div class="code-section">
+                            <label>CSS Code:</label>
+                            <textarea id="cssInput" placeholder="Enter CSS code..." rows="8"></textarea>
+                            <input type="text" id="cssVersion" placeholder="Version (e.g., V1)" class="version-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Link to Block ID (optional):</label>
+                        <select id="linkToBlock">
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-primary" id="savePromptBtn">Save</button>
+                        <button class="btn-secondary" id="cancelBtn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Touch Controls for Mobile -->
+        <div class="touch-controls">
+            <button class="zoom-btn" id="zoomInBtn">+</button>
+            <button class="zoom-btn" id="zoomOutBtn">−</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
